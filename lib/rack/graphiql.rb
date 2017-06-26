@@ -20,7 +20,7 @@ module Rack
       req = Rack::Request.new(env)
       graphiql_query = req.params['query']
       graphiql_variables = begin
-                             JSON.pretty_generate(JSON.parse(req.params['variables']))
+                             JSON.pretty_generate(JSON.parse(req.params['variables'] || ''))
                            rescue JSON::ParserError
                              ''
                            end
