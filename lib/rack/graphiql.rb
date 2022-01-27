@@ -4,10 +4,9 @@ require 'json'
 
 module Rack
   class GraphiQL
-    GRAPHIQL_VERSION     = '0.10.2'
-    FETCH_VERSION        = '2.0.1'
-    REACT_VERSION        = '15.5.4'
-    REACT_DOM_VERSION    = '15.5.4'
+    GRAPHIQL_VERSION     = '1'
+    REACT_VERSION        = '17'
+    REACT_DOM_VERSION    = '17'
 
     include ERB::Util
 
@@ -36,10 +35,6 @@ module Rack
 
     def graphiql_version
       GRAPHIQL_VERSION
-    end
-
-    def fetch_version
-      FETCH_VERSION
     end
 
     def react_version
@@ -71,11 +66,8 @@ __END__
       width: 100%;
     }
   </style>
-  <link href="//cdn.jsdelivr.net/graphiql/<%=h graphiql_version %>/graphiql.css" rel="stylesheet" />
-  <script src="//cdn.jsdelivr.net/fetch/<%=h fetch_version %>/fetch.min.js"></script>
-  <script src="//cdn.jsdelivr.net/react/<%=h react_version %>/react.min.js"></script>
-  <script src="//cdn.jsdelivr.net/react/<%=h react_dom_version %>/react-dom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/graphiql/<%=h graphiql_version %>/graphiql.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/graphiql@<%= graphiql_version %>/graphiql.min.css">
+  <script src="https://cdn.jsdelivr.net/combine/npm/react@<%= react_version %>/umd/react.production.min.js,npm/react-dom@<%= react_dom_version %>/umd/react-dom.production.min.js,npm/graphiql@<%= graphiql_version %>/graphiql.min.js"></script>
 </head>
 <body>
   <script>
